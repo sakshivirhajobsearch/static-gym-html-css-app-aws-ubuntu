@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+  build:
+    commands:
+      - echo "Zipping app..."
+      - zip -r static-gym-html-css-app.zip ./*
+      - aws s3 cp static-gym-html-css-app.zip s3://<your-bucket-name>/
+artifacts:
+  files:
+    - static-gym-html-css-app.zip
