@@ -7,7 +7,7 @@ phases:
     commands:
       - echo "Zipping app..."
       - zip -r static-gym-html-css-app.zip ./*
-      - aws s3 cp static-gym-html-css-app.zip s3://static-gym-html-css-app-aws-ubuntu/
+      - aws s3 cp static-gym-html-css-app.zip s3://my-static-site-bucket/
 artifacts:
   files:
     - static-gym-html-css-app.zip
