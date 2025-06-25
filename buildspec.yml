@@ -1,12 +1,23 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
-      nodejs: latest
+      python: latest
+    commands:
+      - echo Installing dependencies...
+  pre_build:
+    commands:
+      - echo Pre-build step
   build:
     commands:
-      - echo "Zipping app..."
-      - zip -r static-gym-html-css-app.zip ./*
+      - echo Build started
+  post_build:
+    commands:
+      - echo Build completed
+      - aws deploy create-deployment --application-name static-gym-html-css-app --deployment-group-name deployment-group --s3-location bucket=<your-bucket-name>,bundleType=zip,key=static-gym-html-css-app.zip --file-exists-behavior OVERWRITE
+
 artifacts:
   files:
-    - static-gym-html-css-app.zip
+    - '**/*'
+  discard-paths: no
